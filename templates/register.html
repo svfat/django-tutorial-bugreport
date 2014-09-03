@@ -1,13 +1,26 @@
 {% extends 'base.html' %}
 {% block title_block %}Registration{% endblock %}
 {% block content_block %}
+{% load bugs_extras %}
 {% if user.is_authenticated %}
     <a href="{% url 'index' %}">Back to main page</a>
 {% else %}
-    <form action="{% url 'register' %}" method="post">
+    <form class="form form-signin" action="{% url 'register' %}" method="post">
       {% csrf_token %}
-      {{ form.as_p }}
-      <input type="submit" value="Submit" />
+      <h1>Please register</h1>
+      {% for field in form %}
+        <div class="form-group">
+        {% if field.errors %}
+        <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        {{ field.errors }}</div>
+        {% endif %}
+        {{ field.label_tag }}
+        {{ field|add_attributes:"form-control" }}
+        </div>
+      {% endfor %}
+      <button class="btn btn-lg btn-primary btn-block">Register</button>
     </form>
 {% endif %}
 {% endblock %}
+

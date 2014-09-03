@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% block title_block %}Main{% endblock %}
 {% block content_block %}
-<div>
     <h1>Bug list</h1>
-    <table>
+    <table class="table">
         <thead>
         <tr>
             <td>Title</td>
@@ -14,7 +13,7 @@
         </thead>
         <tbody>
         {% for ticket in object_list %}
-        <tr>
+        <tr class="{{ ticket.closed|yesno:"success, danger" }}">
             <td><a href="{% url 'detail' ticket.pk %}">{{ ticket.title }}</a></td>
             <td>{{ ticket.created|date }}</td>
             <td>{{ ticket.user }}</td>
@@ -27,5 +26,4 @@
         {% endfor %}
         </tbody>
     </table>
-</div>
 {% endblock %}
