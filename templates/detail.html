@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title_block %}{{ object.title }}{% endblock %}
+{% block content_block %}
+<div>
+    <h1>{{ object.closed|yesno:"CLOSED, OPENED" }} - {{ object.title }}</h1>
+    <p>{{ object.user }} - {{ object.created|date }}</p>
+    <p>{{ object.text }}</p>
+</div>
+{% endblock %}
