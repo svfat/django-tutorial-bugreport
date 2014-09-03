@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title_block %}Add ticket{% endblock %}
+{% block content_block %}
+{% if user.is_authenticated %}
+    <a href="{% url 'index' %}">Back to main page</a>
+    <form action="{% url 'add' %}" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Submit" />
+    </form>
+{% else %}
+    <p>You should be logged in to add tickets!</p>
+{% endif %}
+{% endblock %}

@@ -8,6 +8,7 @@
         {% if user.is_authenticated %}
             <div>Welcome, {{ user.username }}
             &nbsp;|&nbsp;<a href="{% url 'logout' %}">Logout</a></div>
+            <div><a href="{% url 'add' %}">Add ticket</a></div>
         {% else %}
             <div><a href="{% url 'register' %}">Register
             &nbsp;|&nbsp;<a href="{% url 'login' %}">Login</a></div>
