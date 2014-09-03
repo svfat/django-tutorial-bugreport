@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title_block %}Main{% endblock %}
+{% block content_block %}
+<div>
+    <h1>Bug list</h1>
+    <table>
+        <thead>
+        <tr>
+            <td>Title</td>
+            <td>Created</td>
+            <td>Author</td>
+            <td>Status</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ticket in object_list %}
+        <tr>
+            <td>{{ ticket.title }}</td>
+            <td>{{ ticket.created|date }}</td>
+            <td>{{ ticket.user }}</td>
+            <td>{{ ticket.closed|yesno:"CLOSED, OPENED" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan=4>No tickets yet.</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,3 +1,6 @@
-from django.shortcuts import render
+from django.views.generic import ListView
+from .models import Ticket
 
-# Create your views here.
+class BugListView(ListView):
+    model = Ticket
+    template_name = 'list.html'
