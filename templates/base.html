@@ -5,6 +5,11 @@
         <title>Bugtracker - {% block title_block %}{% endblock %}</title>
     </head>
     <body>
+        {% if user.is_authenticated %}
+            <div>Welcome, {{ user.username }}!</div>
+        {% else %}
+            <div><a href="{% url 'register' %}">Register</a></div>
+        {% endif %}
         {% block content_block %}
         {% endblock %}
     </body>
