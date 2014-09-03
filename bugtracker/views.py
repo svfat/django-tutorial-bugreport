@@ -15,3 +15,13 @@ class RegisterView(CreateView):
     form_class = UserCreationForm
     template_name = 'register.html'
     success_url = reverse_lazy('index')
+
+class BugCreateView(CreateView):
+    model = Ticket
+    template_name = 'add.html'
+    fields = ['title', 'text']
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(BugCreateView, self).form_valid(form)
