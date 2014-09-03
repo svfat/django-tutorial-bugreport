@@ -15,7 +15,7 @@
         <tbody>
         {% for ticket in object_list %}
         <tr>
-            <td>{{ ticket.title }}</td>
+            <td><a href="{% url 'detail' ticket.pk %}">{{ ticket.title }}</a></td>
             <td>{{ ticket.created|date }}</td>
             <td>{{ ticket.user }}</td>
             <td>{{ ticket.closed|yesno:"CLOSED, OPENED" }}</td>
