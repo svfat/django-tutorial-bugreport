@@ -1,28 +1,19 @@
 {% extends 'base.html' %}
 {% block title_block %}Login{% endblock %}
 {% block content_block %}
-<form action="{% url 'login' %}" method="post">
-  {% csrf_token %}
-  {% if form.non_field_errors %}
-    <p>
-      {% for error in form.non_field_errors %}
-      {{ error }}
-      {% endfor %}
-    </p>
-  {% endif %}
-  {% for field in form %}
-    <div>
-      {{ field.label_tag }}
-      {{ field }}
-      {% if field.errors %}
-        <p>
-          {% for error in field.errors %}
-          {{ error }}
-          {% endfor %}
-        </p>
-      {% endif %}
-    </div>
-  {% endfor %}
-  <input type="submit" value="Submit" />
+{% load bugs_extras %}
+{% if form.errors %}
+<div class="alert alert-danger">
+<a href="#" class="close" data-dismiss="alert">&times;</a>
+Your username and password didn't match. Please try again.</div>
+{% endif %}
+
+<form class="form-signin" role="form" action="{% url 'login' %}" method="post" >
+{% csrf_token %}
+<h1>Please sign in</h1>
+{{ form.username|add_attributes:'class:form-control,placeholder:Username' }}
+{{ form.password|add_attributes:'class:form-control,placeholder:Password' }}
+<button class="btn btn-lg btn-primary btn-block">Sign in</button>
 </form>
+
 {% endblock %}
